@@ -16,8 +16,7 @@ import pandas as pd
 
 ROOT_DIR = Path(__file__).resolve().parent
 CSV_PATH = ROOT_DIR / "cell-count.csv"
-DATA_DIR = ROOT_DIR / "data"
-DB_PATH = DATA_DIR / "teiko_trial.db"
+DB_PATH = ROOT_DIR / "teiko_trial.db"
 
 CELL_POPULATIONS = [
     "b_cell",
@@ -154,8 +153,6 @@ def load_data(conn: sqlite3.Connection, csv_path: Path) -> None:
 
 def main() -> None:
     """Create database and load data."""
-
-    DATA_DIR.mkdir(exist_ok=True)
 
     conn = sqlite3.connect(DB_PATH)
 
