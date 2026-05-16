@@ -1,9 +1,9 @@
 setup:
-	pip install -r requirements.txt
+	python -m pip pip install -r requirements.txt
 
 pipeline:
 	python load_data.py
 	python analyze.py
 
 dashboard:
-	streamlit run dashboard.py
+	python -m streamlit run dashboard.py
