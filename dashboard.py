@@ -264,10 +264,18 @@ def main() -> None:
 
         st.dataframe(display_df, use_container_width=True)
 
-        with st.expander("View full cell-frequency table"):
-            full_display_df = frequency_df.copy()
-            full_display_df["percentage"] = full_display_df["percentage"].round(2)
-            st.dataframe(full_display_df, use_container_width=True)
+        st.subheader("Required Summary Table: Cell-Type Frequencies for All Samples")
+
+        st.write(
+            "This table answers Bob's first question directly. Each row represents one "
+            "immune-cell population from one sample and includes the sample ID, total "
+            "cell count, population name, raw count, and relative frequency percentage."
+        )
+
+        full_display_df = frequency_df.copy()
+        full_display_df["percentage"] = full_display_df["percentage"].round(2)
+
+        st.dataframe(full_display_df, use_container_width=True)
 
     elif page == "Responder Analysis":
         st.header("Responder vs Non-Responder Analysis")
