@@ -1,5 +1,5 @@
 setup:
-	python -m pip pip install -r requirements.txt
+	python -m pip install -r requirements.txt
 
 pipeline:
 	python load_data.py
