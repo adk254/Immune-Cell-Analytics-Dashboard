@@ -9,9 +9,8 @@ import pandas as pd
 
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
-DATA_DIR = ROOT_DIR / "data"
 OUTPUTS_DIR = ROOT_DIR / "outputs"
-DB_PATH = DATA_DIR / "teiko_trial.db"
+DB_PATH = ROOT_DIR / "teiko_trial.db"
 
 
 def get_connection() -> sqlite3.Connection:
