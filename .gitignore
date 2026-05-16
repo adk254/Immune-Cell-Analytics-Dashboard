@@ -16,6 +16,7 @@ venv/
 Thumbs.db
 
 # Generated files
+*.db
 data/*.db
 outputs/*
 !outputs/.gitkeep
