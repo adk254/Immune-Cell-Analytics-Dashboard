@@ -1,8 +1,18 @@
-# Immune Cell Population Analysis Pipeline
+# Immune Cell Population Analytics Dashboard
 
-This repository contains a reproducible Python analysis pipeline and interactive dashboard for analyzing immune cell population data from a clinical trial.
+This repository contains a reproducible Python analysis pipeline and interactive dashboard for analyzing clinical-style immune cell population data.
 
 The project loads immune cell count data from `cell-count.csv` into a SQLite database, calculates relative frequencies of immune cell populations, compares melanoma PBMC samples from miraclib responders and non-responders, and summarizes baseline subset results.
+
+## Skills Demonstrated
+
+- Reproducible Python analysis workflow
+- SQLite database design for biological sample metadata and cell-count data
+- Long-format data transformation and aggregation
+- Statistical comparison of biological sample groups
+- Multiple-testing correction with Benjamini–Hochberg FDR
+- Interactive dashboard development with Streamlit and Plotly
+- Clear communication of exploratory biological data analysis results
 
 ## Project Goal
 
@@ -76,7 +86,7 @@ The `src/` module keeps analysis logic separate from orchestration scripts, maki
 
 ## Dashboard
 
-[Live Dashboard](https://adk254-teiko-technical-dashboard.streamlit.app/)
+[Live Dashboard](https://adk254-immune-cell-analysis-dashboard.streamlit.app/)
 
 The dashboard displays the results of the analysis interactively. It includes:
 
@@ -125,7 +135,7 @@ A two-sided Mann–Whitney U test was used because relative immune-cell frequenc
 - FDR-adjusted p-value
 - Significance flag at alpha = 0.05
 
-**Main finding:** CD4 T cells showed the biggest unadjusted difference. Responders had slightly higher average CD4 T-cell frequency (30.54%) than non-responders (29.90%), a difference of +0.64 percentage points (unadjusted p = 0.0133, FDR-adjusted p = 0.0667). After FDR correction, no population was statistically significant at alpha = 0.05. The data suggest a possible CD4 T-cell signal worth follow-up, but do not provide strong corrected statistical evidence that any single population clearly predicts miraclib response.
+**Main finding:** CD4 T cells showed the largest unadjusted difference between groups. Responders had a slightly higher average CD4 T-cell frequency (30.54%) than non-responders (29.90%), a difference of +0.64 percentage points (unadjusted p = 0.0133, FDR-adjusted p = 0.0667). After FDR correction, no immune-cell population was statistically significant at alpha = 0.05. Overall, the analysis suggests a possible CD4 T-cell signal worth follow-up, but does not provide strong corrected statistical evidence that any single measured population clearly distinguishes miraclib responders from non-responders.
 
 ## Baseline Subset Analysis
 
@@ -135,11 +145,11 @@ The baseline subset filters to melanoma PBMC samples from miraclib-treated patie
 - prj1: 384 samples
 - prj3: 272 samples
 
-**Subjects by response:**
+**Baseline records by response:**
 - Responders: 331
 - Non-responders: 325
 
-**Subjects by sex:**
+**Baseline records by sex:**
 - Male: 344
 - Female: 312
 
@@ -156,3 +166,7 @@ All generated files can be recreated from the raw CSV at any time by running:
 ```bash
 make pipeline
 ```
+
+## Limitations
+
+This analysis is exploratory and based on the available sample metadata and five measured immune-cell populations. The results should not be interpreted as evidence of causation or as a validated predictive biomarker. Additional clinical variables, larger datasets, and independent validation would be needed before drawing stronger biological or clinical conclusions.
