@@ -1,4 +1,4 @@
-# Teiko Technical Assessment
+# Immune Cell Population Analysis Pipeline
 
 This repository contains a reproducible Python analysis pipeline and interactive dashboard for analyzing immune cell population data from a clinical trial.
 
@@ -6,9 +6,7 @@ The project loads immune cell count data from `cell-count.csv` into a SQLite dat
 
 ## Project Goal
 
-Bob Loblaw, a drug developer at Loblaw Bio, wants to understand how his drug candidate affects immune cell populations.
-
-The main analysis question is:
+The central analysis question is:
 
 > Do melanoma patients who respond to miraclib have different immune-cell population frequencies than melanoma patients who do not respond?
 
@@ -78,12 +76,12 @@ The `src/` module keeps analysis logic separate from orchestration scripts, maki
 
 ## Dashboard
 
-[Link to dashboard](https://adk254-teiko-technical-dashboard.streamlit.app/)
+[Live Dashboard](https://adk254-teiko-technical-dashboard.streamlit.app/)
 
 The dashboard displays the results of the analysis interactively. It includes:
 
 - **Project Summary**: plain-English overview of the analysis question and main findings.
-- **Cell Frequencies**: required summary table showing each sample's total cell count, immune-cell population, raw count, and relative frequency percentage.
+- **Cell Frequencies**: summary table showing each sample's total cell count, immune-cell population, raw count, and relative frequency percentage.
 - **Responder Analysis**: boxplots and statistical results comparing melanoma PBMC miraclib responders versus non-responders.
 - **Baseline Subset**: project, response, sex, and B-cell summaries for baseline melanoma PBMC samples from miraclib-treated patients.
 
@@ -104,9 +102,7 @@ outputs/baseline_sex_subject_counts.csv
 outputs/male_responder_baseline_bcell_average.txt
 ```
 
-## Part 2: Cell-Type Frequency Summary
-
-Bob's first question was: *What is the frequency of each cell type in each sample?*
+## Cell-Type Frequency Summary
 
 The pipeline calculates total cell count per sample by summing the five populations:
 
@@ -114,9 +110,9 @@ total_count = b_cell + cd8_t_cell + cd4_t_cell + nk_cell + monocyte
 
 percentage  = count / total_count * 100
 
-The result is saved as `outputs/cell_frequencies.csv` with exactly the required columns: `sample`, `total_count`, `population`, `count`, `percentage`. It is also displayed in the dashboard under Cell Frequencies.
+The result is saved as `outputs/cell_frequencies.csv` with columns: `sample`, `total_count`, `population`, `count`, `percentage`. It is also displayed in the dashboard under Cell Frequencies.
 
-## Part 3: Responder vs. Non-Responder Analysis
+## Responder vs. Non-Responder Analysis
 
 The analysis filters to melanoma PBMC samples from patients treated with miraclib, then compares immune-cell relative frequencies between responders (`response = yes`) and non-responders (`response = no`).
 
@@ -131,7 +127,7 @@ A two-sided Mann–Whitney U test was used because relative immune-cell frequenc
 
 **Main finding:** CD4 T cells showed the biggest unadjusted difference. Responders had slightly higher average CD4 T-cell frequency (30.54%) than non-responders (29.90%), a difference of +0.64 percentage points (unadjusted p = 0.0133, FDR-adjusted p = 0.0667). After FDR correction, no population was statistically significant at alpha = 0.05. The data suggest a possible CD4 T-cell signal worth follow-up, but do not provide strong corrected statistical evidence that any single population clearly predicts miraclib response.
 
-## Part 4: Baseline Subset Analysis
+## Baseline Subset Analysis
 
 The baseline subset filters to melanoma PBMC samples from miraclib-treated patients at `time_from_treatment_start = 0`.
 
@@ -149,11 +145,9 @@ The baseline subset filters to melanoma PBMC samples from miraclib-treated patie
 
 **Average B-cell count for melanoma male responders at time = 0: 10401.28**
 
-This is reported as a raw count because the prompt asks for the average number of B cells, not the relative frequency.
-
 ## Notes on Column Names
 
-The prompt refers to `indication` and `gender`, but the provided CSV uses `condition` and `sex`. This project uses the actual column names from `cell-count.csv` throughout.
+The source data uses `condition` and `sex`; this project uses those actual column names throughout rather than any alternative labels.
 
 ## Reproducibility
 
